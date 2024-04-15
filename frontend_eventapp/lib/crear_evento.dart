@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CrearEventoView extends StatefulWidget {
   @override
@@ -10,6 +12,12 @@ class CrearEventoView extends StatefulWidget {
 
 class _CrearEventoViewState extends State<CrearEventoView> {
   File? _image;
+
+  final TextEditingController _nombreEventoController = TextEditingController();
+  final TextEditingController _ubicacionEventoController = TextEditingController();
+  final TextEditingController _descripcionController = TextEditingController();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
 
   Future getImage() async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
@@ -93,6 +101,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        controller: _nombreEventoController,
                       ),
                     ),
                   ],
@@ -124,6 +133,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        controller: _ubicacionEventoController,
                       ),
                     ),
                   ],
@@ -239,6 +249,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        controller: _descripcionController,
                       ),
                     ),
                   ],
@@ -264,8 +275,25 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       ),
                       SizedBox(width: 20),
                       ElevatedButton.icon(
-                        onPressed: () {
-                          //acción guardar
+                        onPressed: () async {
+                          final SharedPreferences prefs = await _prefs;
+                          final token = prefs.getString('token');
+                          final response = await http.post(
+                            Uri.parse('http://20.163.25.147:8000/newpost'),
+                            headers: {
+                              'Content-Type': 'application/form-data',
+                              'Authorization': 'Bearer $token',
+                            },
+                            body: {
+                              'title': _nombreEventoController.text,
+                              // 'location': _ubicacionEventoController.text,
+                              'content': _descripcionController.text,
+                              'file': _image
+                            },
+                          );
+                          if (response.statusCode == 200) {
+                            print("Succesfuly added");
+                          }
                         },
                         icon: Icon(Icons.check, color: Colors.white),
                         label: Text('Guardar', style: TextStyle(color: Colors.white)),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '/sesion.dart'; 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 
 void main() {
@@ -19,13 +21,17 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final TextEditingController _controllerUsername = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   Widget build(BuildContext context) {
@@ -52,32 +58,48 @@ class LoginPage extends StatelessWidget {
                   'https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg',
                   height: 150),
               const SizedBox(height: 50),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'Usuario',
+                    filled: true,
+                    fillColor: const Color(0xFFDA6726), // Color de fondo
                   ),
+                  controller: _controllerUsername,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'Contraseña',
+                    filled: true,
+                    fillColor: const Color(0xFFDA6726), // Color de fondo
                   ),
                   obscureText: true,
+                  controller: _controllerPassword,
                 ),
               ),
               const SizedBox(height: 20),
               MouseRegion(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Lógica de autenticación BACKEND
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Sesion()),
+                  onPressed: () async {
+                    final response = await http.post(
+                      Uri.parse('http://20.163.25.147:8000/login'),
+                      body: {
+                        'username': _controllerUsername.text,
+                        'password': _controllerPassword.text,
+                      },
                     );
+                    if (response.statusCode == 200) {
+                      final SharedPreferences prefs = await _prefs;
+                      await prefs.setString('token', response.body);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Sesion()),
+                      );
+                    }
                   },
                   style: ButtonStyle(
                     minimumSize: MaterialStateProperty.resolveWith<Size>(
@@ -88,7 +110,7 @@ class LoginPage extends StatelessWidget {
                         return const Size(180, 50); //normal
                       },
                     ),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFD96826)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
@@ -106,3 +128,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+

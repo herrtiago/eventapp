@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_eventapp/crear_evento.dart';
 
 class Sesion extends StatelessWidget {
   const Sesion({Key? key}) : super(key: key);
@@ -33,6 +34,12 @@ class Sesion extends StatelessWidget {
                 ),
                 child: const Text('Cerrar Sesión'),
               ),
+              ElevatedButton(onPressed: () {
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CrearEventoView()),
+                      );
+              }, child: const Text('Ver eventos')),
             ],
           ),
         ),

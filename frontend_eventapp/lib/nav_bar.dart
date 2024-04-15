@@ -17,7 +17,7 @@ class _BottomBarViewState extends State<BottomBarView> {
   }
 
   List<Widget> widgetOption = [
-    Placeholder(), //reemplazar Placeholder con pantallas reales
+    Placeholder(), //reemplazar 
     Placeholder(),
     Placeholder(),
     Placeholder(),
