@@ -157,12 +157,24 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       child: DropdownButtonFormField(
                         items: [
                           DropdownMenuItem(
-                            child: Text('Tipo de Evento 1'),
-                            value: 'Tipo de Evento 1',
+                            child: Text('Deportivo'),
+                            value: 'Deportivo',
                           ),
                           DropdownMenuItem(
-                            child: Text('Tipo de Evento 2'),
-                            value: 'Tipo de Evento 2',
+                            child: Text('Cultural'),
+                            value: 'Cultural',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Académico'),
+                            value: 'Académico',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Entretenimiento'),
+                            value: 'Entretenimiento',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Otro'),
+                            value: 'Otro',
                           ),
                           // 
                         ],
@@ -238,7 +250,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
                         maxLines: 5,
                         decoration: InputDecoration(
                           filled: true,
@@ -278,21 +290,15 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         onPressed: () async {
                           final SharedPreferences prefs = await _prefs;
                           final token = prefs.getString('token');
-                          final response = await http.post(
-                            Uri.parse('http://20.163.25.147:8000/newpost'),
-                            headers: {
-                              'Content-Type': 'application/form-data',
-                              'Authorization': 'Bearer $token',
-                            },
-                            body: {
-                              'title': _nombreEventoController.text,
-                              // 'location': _ubicacionEventoController.text,
-                              'content': _descripcionController.text,
-                              'file': _image
-                            },
-                          );
-                          if (response.statusCode == 200) {
-                            print("Succesfuly added");
+                          final response = http.MultipartRequest('POST', Uri.parse('http://20.163.25.147:8000/newpost'))
+                            ..fields['title'] = _nombreEventoController.text
+                            // ..fields['ubicacion'] = _ubicacionEventoController.text
+                            ..fields['content'] = _descripcionController.text
+                            ..files.add(await http.MultipartFile.fromPath('imagen', _image!.path));
+                            response.headers['Authorization'] = 'Bearer $token';
+                          final res = await response.send();
+                          if (res.statusCode == 200) {
+                            print('Evento creado');
                           }
                         },
                         icon: Icon(Icons.check, color: Colors.white),

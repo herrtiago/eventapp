@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
 import '/sesion.dart'; 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 
 void main() {
   runApp(const MyApp());
@@ -49,14 +48,18 @@ class LoginPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 4, 61, 90),
       ),
       body: Container(
-        color: const Color.fromARGB(255, 235, 224, 224),
+        color: Color.fromARGB(255, 255, 255, 255),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SvgPicture.network(
-                  'https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg',
-                  height: 150),
+              Container(
+                padding: const EdgeInsets.all(80),
+                child: Image.asset(
+                  'images/logo.png',  // Path to the local image file
+                  height: 150,
+                ),
+              ),
               const SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -64,7 +67,12 @@ class LoginPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Usuario',
                     filled: true,
-                    fillColor: const Color(0xFFDA6726), // Color de fondo
+                    fillColor: const Color.fromARGB(142, 218, 104, 38), // Color de fondo
+                    labelStyle: TextStyle(color: const Color.fromARGB(186, 255, 255, 255), fontSize: 30),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20), // Bordes curvos
+                      borderSide: BorderSide.none, // Eliminar los bordes
+                    ),
                   ),
                   controller: _controllerUsername,
                 ),
@@ -75,7 +83,12 @@ class LoginPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Contraseña',
                     filled: true,
-                    fillColor: const Color(0xFFDA6726), // Color de fondo
+                    fillColor: Color.fromARGB(142, 218, 104, 38), // Color de fondo
+                    labelStyle: TextStyle(color: const Color.fromARGB(186, 255, 255, 255), fontSize: 30),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20), // Bordes curvos
+                      borderSide: BorderSide.none, // Eliminar los bordes
+                    ),
                   ),
                   obscureText: true,
                   controller: _controllerPassword,
@@ -118,7 +131,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   child: const Text('Login',
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(color: Colors.white, fontSize: 30)),
                 ),
               ),
             ],
@@ -128,4 +141,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
