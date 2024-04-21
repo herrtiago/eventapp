@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomBarView extends StatefulWidget {
-  BottomBarView({Key? key}) : super(key: key);
+  const BottomBarView({Key? key}) : super(key: key);
 
   @override
   State<BottomBarView> createState() => _BottomBarViewState();
@@ -20,8 +20,6 @@ class _BottomBarViewState extends State<BottomBarView> {
     Placeholder(), //reemplazar 
     Placeholder(),
     Placeholder(),
-    Placeholder(),
-    Placeholder(),
   ];
 
   @override
@@ -32,26 +30,18 @@ class _BottomBarViewState extends State<BottomBarView> {
         selectedItemColor: Colors.black,
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Community',
+            label: 'Inicio',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
-            label: 'Create Event',
+            label: 'Mis eventos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.search),
+            label: 'buscar',
           ),
         ],
       ),

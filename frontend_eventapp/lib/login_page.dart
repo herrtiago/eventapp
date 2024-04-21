@@ -56,10 +56,10 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   decoration: InputDecoration(
-                    labelText: 'Usuario',
+                    hintText: 'Usuario',
                     filled: true,
                     fillColor: const Color.fromARGB(142, 218, 104, 38),
-                    labelStyle: TextStyle(
+                    hintStyle: TextStyle(
                       color: const Color.fromARGB(186, 255, 255, 255),
                       fontSize: 17,
                       fontFamily: 'Karla',
@@ -71,6 +71,8 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   controller: _controllerUsername,
+                  style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'Karla'),
+                  
                 ),
               ),
               SizedBox(height: 33),
@@ -78,10 +80,10 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   decoration: InputDecoration(
-                    labelText: 'Contraseña',
+                    hintText: 'Contraseña',
                     filled: true,
                     fillColor: Color.fromARGB(142, 218, 104, 38),
-                    labelStyle: TextStyle(
+                    hintStyle: TextStyle(
                       color: const Color.fromARGB(186, 255, 255, 255),
                       fontSize: 17,
                       fontFamily: 'Karla',
@@ -94,6 +96,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   obscureText: true,
                   controller: _controllerPassword,
+                  style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'Karla'),
                 ),
               ),
               SizedBox(height: 40),
@@ -104,7 +107,7 @@ class LoginPage extends StatelessWidget {
                     Checkbox(
                       value: false,
                       onChanged: (newValue) {
-                        //cambio del valor del checkbox
+                        //valor del checkbox
                       },
                     ),
                     Text(
