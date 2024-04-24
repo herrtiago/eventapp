@@ -33,11 +33,12 @@ class LoginPage extends StatelessWidget {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Center(
+      body: SingleChildScrollView(
+        child: Container(
+          color: Color.fromARGB(255, 255, 255, 255),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -52,75 +53,61 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20), 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Usuario',
-                    filled: true,
-                    fillColor: const Color.fromARGB(142, 218, 104, 38),
-                    hintStyle: TextStyle(
-                      color: const Color.fromARGB(186, 255, 255, 255),
-                      fontSize: 17,
-                      fontFamily: 'Karla',
-                    ),
-                    contentPadding: EdgeInsets.only(left: 20),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Usuario', // Cambia labelText por hintText
+                  filled: true,
+                  fillColor: const Color.fromARGB(142, 218, 104, 38),
+                  hintStyle: TextStyle(
+                    color: Colors.white, // Color del texto de sugerencia
+                    fontSize: 17,
+                    fontFamily: 'Karla',
                   ),
-                  controller: _controllerUsername,
-                  style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'Karla'),
-                  
-                ),
-              ),
-              SizedBox(height: 33),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Contraseña',
-                    filled: true,
-                    fillColor: Color.fromARGB(142, 218, 104, 38),
-                    hintStyle: TextStyle(
-                      color: const Color.fromARGB(186, 255, 255, 255),
-                      fontSize: 17,
-                      fontFamily: 'Karla',
-                    ),
-                    contentPadding: EdgeInsets.only(left: 20),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
+                  contentPadding: EdgeInsets.only(left: 20),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
                   ),
-                  obscureText: true,
-                  controller: _controllerPassword,
-                  style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'Karla'),
+                ),
+                controller: _controllerUsername,
+                style: TextStyle(color: Colors.white), // Color del texto ingresado
+              ),
+              SizedBox(height: 20), 
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Contraseña', // Cambia labelText por hintText
+                  filled: true,
+                  fillColor: Color.fromARGB(142, 218, 104, 38),
+                  hintStyle: TextStyle(
+                    color: Colors.white, // Color del texto de sugerencia
+                    fontSize: 17,
+                    fontFamily: 'Karla',
+                  ),
+                  contentPadding: EdgeInsets.only(left: 20),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                obscureText: true,
+                controller: _controllerPassword,
+                style: TextStyle(color: Colors.white), // Color del texto ingresado
+              ),
+              SizedBox(height: 20), 
+              Checkbox(
+                value: false,
+                onChanged: (newValue) {
+                  //cambio del valor del checkbox
+                },
+              ),
+              Text(
+                'Recordar contraseña',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontFamily: 'Karla',
                 ),
               ),
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (newValue) {
-                        //valor del checkbox
-                      },
-                    ),
-                    Text(
-                      'Recordar contraseña',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontFamily: 'Karla',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 40),
+              SizedBox(height: 20), 
               ElevatedButton(
                 onPressed: () async {
                   final response = await http.post(
