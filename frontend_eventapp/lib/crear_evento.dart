@@ -18,7 +18,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
   final TextEditingController _descripcionController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-
   Future getImage() async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
 
@@ -33,9 +32,26 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textFieldTextStyle = TextStyle(
+      color: Colors.grey, // Color gris para los textos dentro del cuadro de entrada
+      fontSize: 17, // Tamaño de fuente 17
+      fontWeight: FontWeight.bold, // Negrita
+      fontFamily: 'Karla', // Fuente Karla
+    );
+
+    final TextStyle titleTextStyle = TextStyle(
+      color: Colors.black, // Color negro para los títulos
+      fontSize: 17, // Tamaño de fuente 17
+      fontWeight: FontWeight.bold, // Negrita
+      fontFamily: 'Karla', // Fuente Karla
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crear Evento'),
+        title: Text(
+          '',
+          style: titleTextStyle, 
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -50,7 +66,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                   child: Container(
                     height: 150,
                     decoration: BoxDecoration(
-                      color:  Color.fromARGB(255, 211, 211, 211),
+                      color: Color.fromARGB(255, 211, 211, 211),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Stack(
@@ -77,7 +93,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                 SizedBox(height: 8),
 
-                //nombre del evento
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,21 +100,57 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Nombre del Evento',
-                        style: TextStyle(color: Colors.grey),
+                        style: titleTextStyle, // Aplicar el estilo al título
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: TextStyle(color: Colors.black),
+                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.all(5),
+                          contentPadding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          labelText: 'Nombre del Evento',
+                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
+                        ),
+                        controller: _nombreEventoController,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+                SizedBox(height: 8),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Fecha del Evento',
+                        style: titleTextStyle, // Aplicar el estilo al título
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 211, 211, 211),
+                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          labelText: 'Fecha del Evento',
+                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
                         ),
                         controller: _nombreEventoController,
                       ),
@@ -109,7 +160,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                 SizedBox(height: 8),
 
-                //ubicación del evento
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -117,21 +167,23 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Ubicación del Evento',
-                        style: TextStyle(color: Colors.grey),
+                        style: titleTextStyle, // Aplicar el estilo al título
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: TextStyle(color: Colors.black),
+                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.all(5),
+                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          labelText: 'Ubicación del Evento',
+                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
                         ),
                         controller: _ubicacionEventoController,
                       ),
@@ -141,7 +193,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                 SizedBox(height: 8),
 
-                //tipo de evento
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -149,7 +200,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Tipo de Evento',
-                        style: TextStyle(color: Colors.grey),
+                        style: titleTextStyle, 
                       ),
                     ),
                     Padding(
@@ -157,23 +208,23 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       child: DropdownButtonFormField(
                         items: [
                           DropdownMenuItem(
-                            child: Text('Deportivo'),
+                            child: Text('Deportivo', style: textFieldTextStyle),
                             value: 'Deportivo',
                           ),
                           DropdownMenuItem(
-                            child: Text('Cultural'),
+                            child: Text('Cultural', style: textFieldTextStyle),
                             value: 'Cultural',
                           ),
                           DropdownMenuItem(
-                            child: Text('Académico'),
+                            child: Text('Académico', style: textFieldTextStyle),
                             value: 'Académico',
                           ),
                           DropdownMenuItem(
-                            child: Text('Entretenimiento'),
+                            child: Text('Entretenimiento', style: textFieldTextStyle),
                             value: 'Entretenimiento',
                           ),
                           DropdownMenuItem(
-                            child: Text('Otro'),
+                            child: Text('Otro', style: textFieldTextStyle),
                             value: 'Otro',
                           ),
                           // 
@@ -182,7 +233,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.all(5),
+                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
@@ -195,48 +246,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                 SizedBox(height: 8),
 
-                //dentro o fuera
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Dentro o Fuera',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DropdownButtonFormField(
-                        items: [
-                          DropdownMenuItem(
-                            child: Text('Dentro'),
-                            value: 'Dentro',
-                          ),
-                          DropdownMenuItem(
-                            child: Text('Fuera'),
-                            value: 'Fuera',
-                          ),
-                        ],
-                        onChanged: (value) {},
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.all(5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 8),
-
-                //descripción
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -244,22 +253,25 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Descripción',
-                        style: TextStyle(color: Colors.grey),
+                        style: titleTextStyle, // Aplicar el estilo al título
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+                        style: textFieldTextStyle.copyWith(color: Colors.white),
+                        textAlignVertical: TextAlignVertical.top,
                         maxLines: 5,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.all(5),
+                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          labelText: 'Descripción  del evento',
+                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
                         ),
                         controller: _descripcionController,
                       ),
@@ -269,7 +281,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                 SizedBox(height: 8),
 
-                //botones
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -280,7 +291,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           //acción cancelar
                         },
                         icon: Icon(Icons.close, color: Colors.white),
-                        label: Text('Cancelar', style: TextStyle(color: Colors.white)),
+                        label: Text('Cancelar', style: textFieldTextStyle.copyWith(color: Colors.white)),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFD96826)),
                         ),
@@ -300,9 +311,11 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           if (res.statusCode == 200) {
                             print('Evento creado');
                           }
+
+                          //mostratr en el home
                         },
                         icon: Icon(Icons.check, color: Colors.white),
-                        label: Text('Guardar', style: TextStyle(color: Colors.white)),
+                        label: Text('Guardar', style: textFieldTextStyle.copyWith(color: Colors.white)),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF3F768B)),
                         ),
