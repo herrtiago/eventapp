@@ -55,11 +55,11 @@ Widget build(BuildContext context) {
               SizedBox(height: 20), 
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'Usuario', // Cambia labelText por hintText
+                  hintText: 'Usuario', 
                   filled: true,
                   fillColor: const Color.fromARGB(142, 218, 104, 38),
                   hintStyle: TextStyle(
-                    color: Colors.white, // Color del texto de sugerencia
+                    color: Colors.white, 
                     fontSize: 17,
                     fontFamily: 'Karla',
                   ),
@@ -70,16 +70,16 @@ Widget build(BuildContext context) {
                   ),
                 ),
                 controller: _controllerUsername,
-                style: TextStyle(color: Colors.white), // Color del texto ingresado
+                style: TextStyle(color: Colors.white), 
               ),
               SizedBox(height: 20), 
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'Contraseña', // Cambia labelText por hintText
+                  hintText: 'Contraseña',
                   filled: true,
                   fillColor: Color.fromARGB(142, 218, 104, 38),
                   hintStyle: TextStyle(
-                    color: Colors.white, // Color del texto de sugerencia
+                    color: Colors.white, 
                     fontSize: 17,
                     fontFamily: 'Karla',
                   ),
@@ -91,13 +91,13 @@ Widget build(BuildContext context) {
                 ),
                 obscureText: true,
                 controller: _controllerPassword,
-                style: TextStyle(color: Colors.white), // Color del texto ingresado
+                style: TextStyle(color: Colors.white), 
               ),
               SizedBox(height: 20), 
               Checkbox(
                 value: false,
                 onChanged: (newValue) {
-                  //cambio del valor del checkbox
+                  //checkbox
                 },
               ),
               Text(
