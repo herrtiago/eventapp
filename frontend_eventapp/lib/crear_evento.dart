@@ -33,10 +33,10 @@ class _CrearEventoViewState extends State<CrearEventoView> {
   @override
   Widget build(BuildContext context) {
     final TextStyle textFieldTextStyle = TextStyle(
-      color: Colors.grey, // Color gris para los textos dentro del cuadro de entrada
-      fontSize: 17, // Tamaño de fuente 17
-      fontWeight: FontWeight.bold, // Negrita
-      fontFamily: 'Karla', // Fuente Karla
+      color: Colors.grey, 
+      fontSize: 17, 
+      fontWeight: FontWeight.bold, 
+      fontFamily: 'Karla', 
     );
 
     final TextStyle titleTextStyle = TextStyle(
@@ -100,13 +100,13 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Nombre del Evento',
-                        style: titleTextStyle, // Aplicar el estilo al título
+                        style: titleTextStyle, 
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
+                        style: textFieldTextStyle, 
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
@@ -116,7 +116,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           labelText: 'Nombre del Evento',
-                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
+                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
                         ),
                         controller: _nombreEventoController,
                       ),
@@ -134,13 +134,13 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Fecha del Evento',
-                        style: titleTextStyle, // Aplicar el estilo al título
+                        style: titleTextStyle, 
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
+                        style: textFieldTextStyle, 
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
@@ -167,13 +167,13 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Ubicación del Evento',
-                        style: titleTextStyle, // Aplicar el estilo al título
+                        style: titleTextStyle, 
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: textFieldTextStyle, // Aplicar el estilo al texto dentro del cuadro de entrada
+                        style: textFieldTextStyle, 
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
@@ -253,7 +253,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Descripción',
-                        style: titleTextStyle, // Aplicar el estilo al título
+                        style: titleTextStyle, 
                       ),
                     ),
                     Padding(
@@ -294,6 +294,11 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         label: Text('Cancelar', style: textFieldTextStyle.copyWith(color: Colors.white)),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFD96826)),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10), 
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(width: 20),
@@ -318,6 +323,11 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         label: Text('Guardar', style: textFieldTextStyle.copyWith(color: Colors.white)),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF3F768B)),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
                         ),
                       ),
                     ],
