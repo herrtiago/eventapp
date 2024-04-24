@@ -288,7 +288,11 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
-                          //acción cancelar
+                          _nombreEventoController.clear(); 
+                          _ubicacionEventoController.clear(); 
+                          _descripcionController.clear(); 
+
+                          Navigator.of(context).pushNamed('/');
                         },
                         icon: Icon(Icons.close, color: Colors.white),
                         label: Text('Cancelar', style: textFieldTextStyle.copyWith(color: Colors.white)),
