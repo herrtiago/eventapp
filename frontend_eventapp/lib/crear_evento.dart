@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+import '/sesion.dart';
 
 
 class CrearEventoView extends StatefulWidget {
@@ -37,7 +38,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
   @override
   Widget build(BuildContext context) {
     final TextStyle textFieldTextStyle = TextStyle(
-      color: Colors.grey, 
+      color: const Color.fromARGB(255, 86, 86, 86), 
       fontSize: 17, 
       fontWeight: FontWeight.bold, 
       fontFamily: 'Karla', 
@@ -123,6 +124,40 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           hintStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
                         ),
                         controller: _nombreEventoController,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+                SizedBox(height: 8),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Ubicación',
+                        style: titleTextStyle, 
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        style: textFieldTextStyle, 
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 211, 211, 211),
+                          contentPadding: const EdgeInsets.fromLTRB(15, 5, 5, 5),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          hintText: 'Ubicación',
+                          hintStyle: textFieldTextStyle.copyWith(color: const Color.fromARGB(255, 120, 120, 120)), 
+                        ),
+                        controller: _ubicacionEventoController,
                       ),
                     ),
                   ],
@@ -248,7 +283,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
-                        style: textFieldTextStyle.copyWith(color: Colors.white),
+                        style: textFieldTextStyle.copyWith(color: Color.fromARGB(255, 85, 85, 85)),
                         textAlignVertical: TextAlignVertical.top,
                         maxLines: 5,
                         decoration: InputDecoration(
@@ -281,7 +316,10 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           _ubicacionEventoController.clear(); 
                           _descripcionController.clear(); 
 
-                          Navigator.of(context).pushNamed('/');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Sesion()), 
+                          );
                         },
                         icon: Icon(Icons.close, color: Colors.white),
                         label: Text('Cancelar', style: textFieldTextStyle.copyWith(color: Colors.white)),
@@ -294,16 +332,23 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           ),
                         ),
                       ),
+
                       SizedBox(width: 20),
+
                       ElevatedButton.icon(
                         onPressed: () async {
+
+                          print(_fechaEventoController.text);
+
                           final SharedPreferences prefs = await _prefs;
                           final token = prefs.getString('token');
+
                           print(token);
-                          final request = http.MultipartRequest('POST',
-                              Uri.parse('http://20.163.25.147:8000/newpost'));
-                          request.headers['Authorization'] = '$token';
+
+                          final request = http.MultipartRequest('POST', Uri.parse('http://20.163.25.147:8000/newpost'));
+                          request.headers['Authorization'] = 'Bearer $token';
                           // print(request.headers['Authorization']);
+
                           request.files.add(await http.MultipartFile(
                               'file',
                               _image!.readAsBytes().asStream(),
@@ -319,20 +364,48 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                               _fechaEventoController.text;
                           request.fields['type_event'] =
                               _tipoEventoController.text;
+                          request.fields['tags'] = "const";
+
                           final response = await request.send();
                           var responseBody =
                               await response.stream.bytesToString();
-                          print(responseBody);
-                          //   ..fields['title'] = _nombreEventoController.text
-                          //   // ..fields['ubicacion'] = _ubicacionEventoController.text
-                          //   ..fields['content'] = _descripcionController.text
-                          //   ..files.add(await http.MultipartFile.fromPath(
-                          //       'imagen', _image!.path));
-                          // response.headers['Authorization'] = 'Bearer $token';
-                          // final res = await response.send();
-                          if (response.statusCode == 200) {
-                            print('Evento creado');
-                          }
+
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                content: Text(
+                                  'Evento creado exitosamente',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontFamily: 'Karla',
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  Center(
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Aceptar',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontFamily: 'Karla',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                ],
+                              );
+                            },
+                          );
+
                         },
                         icon: Icon(Icons.check, color: Colors.white),
                         label: Text('Guardar', style: textFieldTextStyle.copyWith(color: Colors.white)),

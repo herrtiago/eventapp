@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/sesion.dart'; 
@@ -71,7 +73,11 @@ Widget build(BuildContext context) {
                   ),
                 ),
                 controller: _controllerUsername,
-                style: TextStyle(color: Colors.white), 
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontFamily: 'Karla',
+                ),
               ),
               SizedBox(height: 20), 
               TextField(
@@ -92,7 +98,11 @@ Widget build(BuildContext context) {
                 ),
                 obscureText: true,
                 controller: _controllerPassword,
-                style: TextStyle(color: Colors.white), 
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontFamily: 'Karla',
+                ), 
               ),
               SizedBox(height: 20), 
               
@@ -129,8 +139,9 @@ Widget build(BuildContext context) {
                   );
                   if (response.statusCode == 200) {
                     final SharedPreferences prefs = await _prefs;
-                    print(response.body);
-                    await prefs.setString('token', response.body);
+                    var json_data = jsonDecode(response.body);
+                    print(json_data['access_token']);
+                    await prefs.setString('token', json_data['access_token']);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const Sesion()),
