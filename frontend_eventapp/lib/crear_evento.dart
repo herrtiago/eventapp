@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+
 
 class CrearEventoView extends StatefulWidget {
   @override
@@ -16,6 +18,8 @@ class _CrearEventoViewState extends State<CrearEventoView> {
   final TextEditingController _nombreEventoController = TextEditingController();
   final TextEditingController _ubicacionEventoController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
+  final TextEditingController _tipoEventoController = TextEditingController();
+  final TextEditingController _fechaEventoController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future getImage() async {
@@ -115,8 +119,8 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          labelText: 'Nombre del Evento',
-                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
+                          hintText: 'Nombre del Evento',
+                          hintStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
                         ),
                         controller: _nombreEventoController,
                       ),
@@ -134,63 +138,48 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Fecha del Evento',
-                        style: titleTextStyle, 
+                        style: titleTextStyle,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        style: textFieldTextStyle, 
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
+                      child: InkWell(
+                        onTap: () async {
+                          final selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2022),
+                            lastDate: DateTime(2030),
+                          );
+                          if (selectedDate != null) {
+                            setState(() {
+                              _fechaEventoController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
+                            });
+                          }
+                        },
+                        child: IgnorePointer(
+                          child: TextField(
+                            style: textFieldTextStyle,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Color.fromARGB(255, 211, 211, 211),
+                              contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              hintText: 'Fecha del Evento',
+                              hintStyle: textFieldTextStyle.copyWith(color: Colors.grey),
+                            ),
+                            controller: _fechaEventoController,
                           ),
-                          labelText: 'Fecha del Evento',
-                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
                         ),
-                        controller: _nombreEventoController,
                       ),
                     ),
                   ],
                 ),
 
-                SizedBox(height: 8),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Ubicación del Evento',
-                        style: titleTextStyle, 
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        style: textFieldTextStyle, 
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 211, 211, 211),
-                          contentPadding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelText: 'Ubicación del Evento',
-                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), // Color gris para el texto dentro del cuadro de entrada
-                        ),
-                        controller: _ubicacionEventoController,
-                      ),
-                    ),
-                  ],
-                ),
-
+                
                 SizedBox(height: 8),
 
                 Column(
@@ -229,7 +218,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           ),
                           // 
                         ],
-                        onChanged: (value) {},
+                        onChanged: (value) {_tipoEventoController.text = value.toString();},
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color.fromARGB(255, 211, 211, 211),
@@ -270,8 +259,8 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          labelText: 'Descripción  del evento',
-                          labelStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
+                          hintText: 'Descripción  del evento',
+                          hintStyle: textFieldTextStyle.copyWith(color: Colors.grey), 
                         ),
                         controller: _descripcionController,
                       ),
@@ -310,18 +299,38 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         onPressed: () async {
                           final SharedPreferences prefs = await _prefs;
                           final token = prefs.getString('token');
-                          final response = http.MultipartRequest('POST', Uri.parse('http://20.163.25.147:8000/newpost'))
-                            ..fields['title'] = _nombreEventoController.text
-                            // ..fields['ubicacion'] = _ubicacionEventoController.text
-                            ..fields['content'] = _descripcionController.text
-                            ..files.add(await http.MultipartFile.fromPath('imagen', _image!.path));
-                            response.headers['Authorization'] = 'Bearer $token';
-                          final res = await response.send();
-                          if (res.statusCode == 200) {
+                          final request = http.MultipartRequest('POST',
+                              Uri.parse('http://20.163.25.147:8000/newpost'));
+                          request.headers['Authorization'] = 'Bearer $token';
+                          request.files.add(await http.MultipartFile(
+                              'file',
+                              _image!.readAsBytes().asStream(),
+                              _image!.lengthSync(),
+                              filename: _image!.path.split('/').last));
+                          request.fields['title'] =
+                              _nombreEventoController.text;
+                          request.fields['content'] =
+                              _descripcionController.text;
+                          request.fields['location'] =
+                              _ubicacionEventoController.text;
+                          request.fields['datetime'] =
+                              _fechaEventoController.text;
+                          request.fields['type_event'] =
+                              _tipoEventoController.text;
+                          final response = await request.send();
+                          var responseBody =
+                              await response.stream.bytesToString();
+                          print(responseBody);
+                          //   ..fields['title'] = _nombreEventoController.text
+                          //   // ..fields['ubicacion'] = _ubicacionEventoController.text
+                          //   ..fields['content'] = _descripcionController.text
+                          //   ..files.add(await http.MultipartFile.fromPath(
+                          //       'imagen', _image!.path));
+                          // response.headers['Authorization'] = 'Bearer $token';
+                          // final res = await response.send();
+                          if (response.statusCode == 200) {
                             print('Evento creado');
                           }
-
-                          //mostratr en el home
                         },
                         icon: Icon(Icons.check, color: Colors.white),
                         label: Text('Guardar', style: textFieldTextStyle.copyWith(color: Colors.white)),
