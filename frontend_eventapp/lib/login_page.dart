@@ -95,19 +95,28 @@ Widget build(BuildContext context) {
                 style: TextStyle(color: Colors.white), 
               ),
               SizedBox(height: 20), 
-              Checkbox(
-                value: false,
-                onChanged: (newValue) {
-                  //checkbox
-                },
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Checkbox(
+                    value: false,
+                    onChanged: (newValue) {
+                      // Cambio del valor del checkbox
+                    },
+                  ),
+                  SizedBox(width: 8), // Espacio entre el checkbox y el texto
+                  Text(
+                    'Recordar contraseña',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Karla',
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'Recordar contraseña',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontFamily: 'Karla',
-                ),
-              ),
+
               SizedBox(height: 20), 
               ElevatedButton(
                 onPressed: () async {
@@ -120,6 +129,7 @@ Widget build(BuildContext context) {
                   );
                   if (response.statusCode == 200) {
                     final SharedPreferences prefs = await _prefs;
+                    print(response.body);
                     await prefs.setString('token', response.body);
                     Navigator.push(
                       context,

@@ -299,9 +299,11 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                         onPressed: () async {
                           final SharedPreferences prefs = await _prefs;
                           final token = prefs.getString('token');
+                          print(token);
                           final request = http.MultipartRequest('POST',
                               Uri.parse('http://20.163.25.147:8000/newpost'));
-                          request.headers['Authorization'] = 'Bearer $token';
+                          request.headers['Authorization'] = '$token';
+                          // print(request.headers['Authorization']);
                           request.files.add(await http.MultipartFile(
                               'file',
                               _image!.readAsBytes().asStream(),
