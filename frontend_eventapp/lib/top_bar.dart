@@ -9,16 +9,23 @@ class TopBarView extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(Icons.menu),
         onPressed: () {
-          //menú
+          // menú
         },
       ),
-      title: Text('My App'),
+      title: SizedBox(
+        width: 120, // Ancho deseado para la imagen
+        height: kToolbarHeight, // Alto de la barra de navegación
+        child: Image.asset(
+          'images/logo.png', // Ruta de la imagen
+          fit: BoxFit.contain, // Ajustar la imagen para que quepa dentro del contenedor
+        ),
+      ),
       centerTitle: true,
       actions: [
         IconButton(
           icon: Icon(Icons.notifications),
           onPressed: () {
-            //notificaciones
+            // notificaciones
           },
         ),
       ],

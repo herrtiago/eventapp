@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend_eventapp/home.dart';
 import '/sesion.dart'; 
 import '/crear_evento.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
