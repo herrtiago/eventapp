@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart'; // Importa la página Home u otras páginas que desees mostrar
 
 class BottomBarView extends StatefulWidget {
   const BottomBarView({Key? key}) : super(key: key);
@@ -8,36 +9,26 @@ class BottomBarView extends StatefulWidget {
 }
 
 class _BottomBarViewState extends State<BottomBarView> {
-  int currentIndex = 0;
+  int _currentIndex = 0;
 
-  void onItemTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
-  List<Widget> widgetOption = [
-    Placeholder(), // Reemplazar con tu widget correspondiente
-    Placeholder(),
-    Placeholder(),
+  final List<Widget> _pages = [
+    HomePage(),
   ];
 
-  final TextStyle _textStyle = TextStyle(
-    color: const Color.fromARGB(255, 86, 86, 86),
-    fontSize: 17,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Karla',
-  );
+  //cambio de página
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _pages[_currentIndex], // Mostrar la página actual según el índice seleccionado
       bottomNavigationBar: BottomNavigationBar(
-        onTap: onItemTapped,
-        selectedItemColor: Colors.black,
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true, // Asegura que se muestren las etiquetas seleccionadas
+        onTap: _onItemTapped, // Función para manejar el cambio de página
+        currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -45,29 +36,14 @@ class _BottomBarViewState extends State<BottomBarView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event),
-            label: 'Mis eventos',
+            label: 'Eventos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Buscar',
           ),
         ],
-        // Estilo personalizado para el texto seleccionado
-        selectedLabelStyle: TextStyle(
-          color: const Color.fromARGB(255, 86, 86, 86),
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Karla',
-        ),
-        // Estilo personalizado para el texto no seleccionado
-        unselectedLabelStyle: TextStyle(
-          color: const Color.fromARGB(255, 86, 86, 86),
-          fontSize: 17,
-          fontWeight: FontWeight.normal,
-          fontFamily: 'Karla',
-        ),
       ),
-      body: widgetOption[currentIndex],
     );
   }
 }

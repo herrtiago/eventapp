@@ -9,26 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        textTheme: GoogleFonts.justAnotherHandTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
-      home: HomePage(),
-    );
-  }
-}
-
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
@@ -37,7 +17,7 @@ class LoginPage extends StatelessWidget {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'top_bar.dart'; // Importa solo la parte superior
+import 'top_bar.dart'; 
+import 'bottom_bar.dart';
 
 class HomePage extends StatelessWidget {
   final TextStyle _textStyle = TextStyle(
@@ -30,26 +31,27 @@ class HomePage extends StatelessWidget {
           ),
         ),
         // Agrega el BottomNavigationBar aquí
-        BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Inicio',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.event),
-              label: 'Mis eventos',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Buscar',
-            ),
-          ],
-          // Controla la selección del ítem
-          currentIndex: 0,
-          selectedItemColor: Colors.black,
-          onTap: (index) {},
-        ),
+        // BottomNavigationBar(
+        //   items: const [
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.home),
+        //       label: 'Inicio',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.event),
+        //       label: 'Mis eventos',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.search),
+        //       label: 'Buscar',
+        //     ),
+        //   ],
+        //   // Controla la selección del ítem
+        //   currentIndex: 0,
+        //   selectedItemColor: Colors.black,
+        //   onTap: (index) {},
+        // ),
+        //BottomBarView(),
       ],
     );
   }
