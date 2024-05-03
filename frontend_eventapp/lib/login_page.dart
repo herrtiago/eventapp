@@ -138,7 +138,7 @@ class LoginPage extends StatelessWidget {
                       return const Size(180, 50); 
                     },
                   ),
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFD96826)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 217, 104, 38)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
