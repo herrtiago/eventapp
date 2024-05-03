@@ -3,6 +3,7 @@ import 'bottom_bar.dart';
 import 'home.dart'; 
 import 'lobby.dart';
 import 'login_page.dart';
+//import 'signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       home: LobbyPage(), // BottomBarView como la página inicial
       routes: {
         '/home': (context) =>  HomePage(),
-        '/login': (context) =>  LoginPage(), // Ruta para la página de login
+        '/login': (context) =>  LoginPage(), 
+        //'/signin': (context) =>  SigninPage(),
         //'/politicas':(context) =>  // Ruta para la página Home
         //'/lobby': (context) => const LobbyPage(), // Ruta para la página de lobby
         // Agrega rutas para otras páginas aquí
