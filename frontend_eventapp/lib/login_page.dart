@@ -101,14 +101,14 @@ class LoginPage extends StatelessWidget {
                   Text(
                     'Recordar contraseña',
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       fontFamily: 'Karla',
                     ),
                   ),
                 ],
               ),
 
-              SizedBox(height: 20), 
+              SizedBox(height: 140), 
               ElevatedButton(
                 onPressed: () async {
                   final response = await http.post(
@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Iniciar Sesión',
+                  'INICIAR SESIÓN',
                   style: TextStyle(
                     color: Color.fromARGB(186, 255, 255, 255),
                     fontSize: 15,
