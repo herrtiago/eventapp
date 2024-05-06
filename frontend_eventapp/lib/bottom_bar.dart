@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_eventapp/crear_evento.dart';
 import 'home.dart'; // Importa la página Home u otras páginas que desees mostrar
 
 class BottomBarView extends StatefulWidget {
@@ -13,6 +14,7 @@ class _BottomBarViewState extends State<BottomBarView> {
 
   final List<Widget> _pages = [
     HomePage(),
+    CrearEventoView(),
   ];
 
   //cambio de página
@@ -20,30 +22,40 @@ class _BottomBarViewState extends State<BottomBarView> {
     setState(() {
       _currentIndex = index;
     });
+    switch (index) {
+      case 0:
+        Navigator.pushReplacementNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushReplacementNamed(context, '/crear_evento');
+        break;
+      case 2:
+        Navigator.pushReplacementNamed(context, '/buscar');
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex], // Mostrar la página actual según el índice seleccionado
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _onItemTapped, // Función para manejar el cambio de página
-        currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: 'Eventos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Buscar',
-          ),
-        ],
-      ),
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Inicio',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.event),
+          label: 'Crear evento',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Buscar',
+        ),
+      ],
+      // Controla la selección del ítem
+      currentIndex: _currentIndex,
+      selectedItemColor: Colors.black,
+      onTap: _onItemTapped,
     );
   }
 }

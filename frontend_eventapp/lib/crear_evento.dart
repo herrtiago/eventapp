@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frontend_eventapp/home.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -318,7 +319,7 @@ class _CrearEventoViewState extends State<CrearEventoView> {
 
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Sesion()), 
+                            MaterialPageRoute(builder: (context) => HomePage()), 
                           );
                         },
                         icon: Icon(Icons.close, color: Colors.white),

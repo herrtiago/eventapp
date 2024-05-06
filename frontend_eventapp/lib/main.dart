@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_eventapp/crear_evento.dart';
 import 'bottom_bar.dart'; 
 import 'home.dart'; 
 import 'lobby.dart';
 import 'login_page.dart';
 import 'policies.dart';
-//import 'signin_page.dart';
+import 'signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,14 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LobbyPage(), 
+      home: RegistroPage(), 
       routes: {
         '/home': (context) =>  HomePage(),
         '/login': (context) =>  LoginPage(), 
         //'/signin': (context) =>  SigninPage(),
         '/policies':(context) => PoliciessPage(),
-        //'/lobby': (context) => const LobbyPage(), // Ruta para la página de lobby
-        // Agrega rutas para otras páginas aquí
+        //'/lobby': (context) => const LobbyPage(), 
+        '/crear_evento': (context) => CrearEventoView(),
       },
     );
   }
