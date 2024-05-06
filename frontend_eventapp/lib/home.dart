@@ -31,26 +31,26 @@ class HomePage extends StatelessWidget {
           ),
         ),
         // Agrega el BottomNavigationBar aquí
-        // BottomNavigationBar(
-        //   items: const [
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.home),
-        //       label: 'Inicio',
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.event),
-        //       label: 'Mis eventos',
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.search),
-        //       label: 'Buscar',
-        //     ),
-        //   ],
-        //   // Controla la selección del ítem
-        //   currentIndex: 0,
-        //   selectedItemColor: Colors.black,
-        //   onTap: (index) {},
-        // ),
+        BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.event),
+              label: 'Mis eventos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Buscar',
+            ),
+          ],
+          // Controla la selección del ítem
+          currentIndex: 0,
+          selectedItemColor: Colors.black,
+          onTap: (index) {},
+        ),
         //BottomBarView(),
       ],
     );
