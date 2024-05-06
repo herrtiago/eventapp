@@ -3,6 +3,7 @@ import 'bottom_bar.dart';
 import 'home.dart'; 
 import 'lobby.dart';
 import 'login_page.dart';
+import 'policies.dart';
 //import 'signin_page.dart';
 
 void main() {
@@ -15,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LobbyPage(), // BottomBarView como la página inicial
+      home: LobbyPage(), 
       routes: {
         '/home': (context) =>  HomePage(),
         '/login': (context) =>  LoginPage(), 
         //'/signin': (context) =>  SigninPage(),
-        //'/politicas':(context) =>  // Ruta para la página Home
+        '/policies':(context) => PoliciessPage(),
         //'/lobby': (context) => const LobbyPage(), // Ruta para la página de lobby
         // Agrega rutas para otras páginas aquí
       },

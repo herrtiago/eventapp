@@ -26,16 +26,15 @@ class LobbyPage extends StatelessWidget {
             Center(
               child: const Text(
                 'DESCUBRE NUEVOS EVENTOS',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 17),
               ),
             ),
             const SizedBox(height: 230), 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: GestureDetector(
-                // Para detectar los toques en el texto
                 onTap: () {
-                  Navigator.pushNamed(context, '/politicas');
+                  Navigator.pushNamed(context, '/policies');
                 },
                 child: const Text(
                   'Al registrarte, aceptas nuestros Términos y Políticas de privacidad',
