@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 class EventCard extends StatelessWidget {
   final String eventName;
   final String date;
-  final String location; // Cambiar el nombre de la variable de "time" a "location"
+  final String location; 
   final String imageUrl;
+  final String content;
+  final dynamic author;
 
   const EventCard({
     required this.eventName,
     required this.date,
-    required this.location, // Cambiar el nombre de la variable de "time" a "location"
+    required this.location, 
     required this.imageUrl,
+    required this.content,
+    required this.author,
   });
 
   @override
@@ -80,7 +84,18 @@ class EventCard extends StatelessWidget {
                       SizedBox(width: 10), // Espacio entre las columnas
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/event_page');
+                          Navigator.pushNamed(
+                            context,
+                            '/event_page',
+                            arguments: {
+                              'eventName': eventName,
+                              'date': date,
+                              'location': location,
+                              'description': content,
+                              'author': author,
+                              'imageUrl': imageUrl,
+                            },
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 77, 127, 158), 

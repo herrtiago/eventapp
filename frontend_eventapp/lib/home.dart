@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'event.dart';
 import 'top_bar.dart';
 import 'package:http/http.dart' as http;
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<Evento>> fetchEventos() async {
@@ -54,7 +53,8 @@ class HomePage extends StatelessWidget {
                   eventName: evento.nombre,
                   date: evento.fecha.toString(),
                   location: evento.ubicacion, 
-                  imageUrl: evento.imageUrl,
+                  content: evento.content,
+                  imageUrl: evento.imageUrl, author: null,
                 );
               },
             );

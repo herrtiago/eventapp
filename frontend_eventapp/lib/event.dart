@@ -3,7 +3,7 @@ import 'users.dart';
 class Evento {
   final int id;
   final String nombre;
-  final String descripcion;
+  final String content;
   final bool publicado;
   final int likes;
   final DateTime createdAt;
@@ -17,7 +17,7 @@ class Evento {
   Evento({
     required this.id,
     required this.nombre,
-    required this.descripcion,
+    required this.content,
     required this.publicado,
     required this.likes,
     required this.createdAt,
@@ -33,7 +33,7 @@ class Evento {
     return Evento(
       id: json['id'],
       nombre: json['title'],
-      descripcion: json['content'],
+      content: json['content'],
       publicado: json['published'],
       likes: json['likes'],
       createdAt: DateTime.parse(json['created_at']),
