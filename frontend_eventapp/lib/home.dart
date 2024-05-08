@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'top_bar.dart'; 
 import 'bottom_bar.dart';
 import 'event_card.dart';
-import 'dart:convert'; 
+import 'dart:convert';
 import 'event.dart';
+import 'top_bar.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Evento>> fetchEventos() async {
-  final response = await http.get(Uri.parse('http://20.163.25.147:8000/newpost'));
+  final response =
+      await http.get(Uri.parse('http://20.163.25.147:8000/newpost'));
   if (response.statusCode == 200) {
     final List<dynamic> data = jsonDecode(response.body);
     return data.map((eventoJson) => Evento.fromJson(eventoJson)).toList();
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBarView(),
+      drawer: TopBarView.buildDrawer(context), 
       body: FutureBuilder<List<Evento>>(
         future: fetchEventos(),
         builder: (context, snapshot) {
@@ -42,8 +44,8 @@ class HomePage extends StatelessWidget {
                 final evento = snapshot.data![index];
                 return EventCard(
                   eventName: evento.nombre,
-                  date: evento.fecha.toString(), // Convertimos DateTime a String
-                  time: evento.fecha.toString(), // Convertimos DateTime a String
+                  date: evento.fecha.toString(),
+                  time: evento.fecha.toString(),
                   imageUrl: evento.imageUrl,
                 );
               },
