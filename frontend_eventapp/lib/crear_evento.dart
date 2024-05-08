@@ -344,8 +344,6 @@ class _CrearEventoViewState extends State<CrearEventoView> {
                           final SharedPreferences prefs = await _prefs;
                           final token = prefs.getString('token');
 
-                          print(token);
-
                           final request = http.MultipartRequest('POST', Uri.parse('http://20.163.25.147:8000/newpost'));
                           request.headers['Authorization'] = 'Bearer $token';
                           // print(request.headers['Authorization']);

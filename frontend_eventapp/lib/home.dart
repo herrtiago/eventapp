@@ -5,10 +5,18 @@ import 'dart:convert';
 import 'event.dart';
 import 'top_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<Evento>> fetchEventos() async {
-  final response =
-      await http.get(Uri.parse('http://20.163.25.147:8000/newpost'));
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('token');
+
+  final response = await http.get(
+    Uri.parse('http://20.163.25.147:8000/posts'),
+    headers: {'Authorization': 'Bearer $token'},
+  );
+
   if (response.statusCode == 200) {
     final List<dynamic> data = jsonDecode(response.body);
     return data.map((eventoJson) => Evento.fromJson(eventoJson)).toList();
@@ -45,7 +53,7 @@ class HomePage extends StatelessWidget {
                 return EventCard(
                   eventName: evento.nombre,
                   date: evento.fecha.toString(),
-                  time: evento.fecha.toString(),
+                  location: evento.ubicacion, 
                   imageUrl: evento.imageUrl,
                 );
               },

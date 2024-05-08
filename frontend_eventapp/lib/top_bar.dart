@@ -43,23 +43,42 @@ class TopBarView extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.zero,
           children: [
             ListTile(
-              title: Text(
-                'Cuenta',
-                style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 70, left: 20), // Padding superior
+                child: Text(
+                  'Cuenta',
+                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+                ),
               ),
               onTap: () {
                 Navigator.pop(context); 
-                Navigator.pushNamed(context, '/cuenta'); // Navega a la ruta de la cuenta
+                Navigator.pushNamed(context, '/cuenta'); 
               },
             ),
             ListTile(
-              title: Text(
-                'Configuración',
-                style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 20), // Padding superior
+                child: Text(
+                  'Configuración',
+                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+                ),
               ),
               onTap: () {
                 Navigator.pop(context); 
-                Navigator.pushNamed(context, '/configuracion'); // Navega a la ruta de configuración
+                Navigator.pushNamed(context, '/configuracion'); 
+              },
+            ),
+            ListTile(
+              title: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 20), // Padding superior
+                child: Text(
+                  'Crear Evento',
+                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context); 
+                Navigator.pushNamed(context, '/crear_evento'); 
               },
             ),
           ],

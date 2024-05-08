@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_eventapp/crear_evento.dart';
-import 'home.dart'; // Importa la página Home u otras páginas que desees mostrar
+import 'home.dart'; 
+import 'search_view.dart';
 
 class BottomBarView extends StatefulWidget {
   const BottomBarView({Key? key}) : super(key: key);
@@ -15,9 +16,10 @@ class _BottomBarViewState extends State<BottomBarView> {
   final List<Widget> _pages = [
     HomePage(),
     CrearEventoView(),
+    BuscarView(), 
   ];
 
-  //cambio de página
+  // Cambio de página
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -30,7 +32,7 @@ class _BottomBarViewState extends State<BottomBarView> {
         Navigator.pushReplacementNamed(context, '/crear_evento');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/buscar');
+        // No es necesario navegar a la vista de búsqueda ya que está incluida en el BottomBar
         break;
     }
   }

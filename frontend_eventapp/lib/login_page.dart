@@ -125,7 +125,7 @@ class LoginPage extends StatelessWidget {
                     await prefs.setString('token', json_data['access_token']);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Sesion()),
+                      MaterialPageRoute(builder: (context) =>  HomePage()),
                     );
                   }
                 },
