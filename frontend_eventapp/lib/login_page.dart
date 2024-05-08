@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:frontend_eventapp/home.dart';
 import '/sesion.dart'; 
 import '/crear_evento.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
