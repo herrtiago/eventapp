@@ -3,6 +3,7 @@ import 'top_bar.dart';
 import 'bottom_bar.dart';
 import 'event_card.dart';
 import 'dart:convert'; 
+import 'event.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Evento>> fetchEventos() async {
@@ -12,35 +13,6 @@ Future<List<Evento>> fetchEventos() async {
     return data.map((eventoJson) => Evento.fromJson(eventoJson)).toList();
   } else {
     throw Exception('Error al cargar los eventos');
-  }
-}
-
-class Evento {
-  final String nombre;
-  final String ubicacion;
-  final String descripcion;
-  final String fecha;
-  final String tipo;
-  final String imageUrl; // Nueva propiedad para la URL de la imagen
-
-  Evento({
-    required this.nombre,
-    required this.ubicacion,
-    required this.descripcion,
-    required this.fecha,
-    required this.tipo,
-    required this.imageUrl,
-  });
-
-  factory Evento.fromJson(Map<String, dynamic> json) {
-    return Evento(
-      nombre: json['nombre'],
-      ubicacion: json['ubicacion'],
-      descripcion: json['descripcion'],
-      fecha: json['fecha'],
-      tipo: json['tipo'],
-      imageUrl: json['imageUrl'], // Asignación de la URL de la imagen desde el JSON
-    );
   }
 }
 
@@ -70,9 +42,9 @@ class HomePage extends StatelessWidget {
                 final evento = snapshot.data![index];
                 return EventCard(
                   eventName: evento.nombre,
-                  date: evento.fecha,
-                  time: '00:00', // Aquí puedes proporcionar la hora si está disponible
-                  imageUrl: evento.imageUrl, // Pasamos la URL de la imagen desde el evento
+                  date: evento.fecha.toString(), // Convertimos DateTime a String
+                  time: evento.fecha.toString(), // Convertimos DateTime a String
+                  imageUrl: evento.imageUrl,
                 );
               },
             );
