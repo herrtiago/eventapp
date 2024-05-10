@@ -6,7 +6,7 @@ class EventCard extends StatelessWidget {
   final String location; 
   final String imageUrl;
   final String content;
-  final dynamic author;
+  final String username;
 
   const EventCard({
     required this.eventName,
@@ -14,7 +14,7 @@ class EventCard extends StatelessWidget {
     required this.location, 
     required this.imageUrl,
     required this.content,
-    required this.author,
+    required this.username,
   });
 
   @override
@@ -92,7 +92,7 @@ class EventCard extends StatelessWidget {
                               'date': date,
                               'location': location,
                               'content': content,
-                              'author': author,
+                              'username': username,
                               'imageUrl': imageUrl,
                             },
                           );
