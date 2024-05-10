@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class EventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Obtener los datos del evento de los argumentos
-    final Map<String, dynamic> args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final Map<String, dynamic>? args =
+      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+    if (args == null) {
+      throw Exception("Los argumentos son nulos");
+    }
 
     final String eventName = args['eventName'];
     final String date = args['date'];

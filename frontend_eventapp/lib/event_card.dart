@@ -91,7 +91,7 @@ class EventCard extends StatelessWidget {
                               'eventName': eventName,
                               'date': date,
                               'location': location,
-                              'description': content,
+                              'content': content,
                               'author': author,
                               'imageUrl': imageUrl,
                             },
