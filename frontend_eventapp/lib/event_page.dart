@@ -15,7 +15,6 @@ class EventPage extends StatelessWidget {
     final String date = args['date'];
     final String location = args['location'];
     final String content = args['content'];
-    final String username = args['username'];
     final String imageUrl = args['imageUrl'];
 
     return Scaffold(
@@ -90,8 +89,6 @@ class EventPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                  Text(username), // Mostrar el nombre de usuario del autor
-                  SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(

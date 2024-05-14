@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                   date: evento.fecha.toString(),
                   location: evento.ubicacion, 
                   content: evento.content,
-                  imageUrl: evento.imageUrl, author: null,
+                  imageUrl: evento.imageUrl,
                 );
               },
             );
