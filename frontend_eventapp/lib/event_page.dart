@@ -37,7 +37,7 @@ class EventPage extends StatelessWidget {
           // Segunda fila con la información del evento
           Expanded(
             child: Container(
-              padding: const EdgeInsets.only(top: 20), 
+              padding: const EdgeInsets.only(top: 30), 
               margin: EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -56,19 +56,19 @@ class EventPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Row(
                     children: [
                       Icon(Icons.calendar_today),
-                      SizedBox(width: 5),
+                      SizedBox(width: 6),
                       Text(date),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       Icon(Icons.location_on),
-                      SizedBox(width: 5),
+                      SizedBox(width: 6),
                       Text(location),
                     ],
                   ),
