@@ -28,7 +28,7 @@ class EventPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 350, // Altura de la imagen
+            height: 300, // Altura de la imagen
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
@@ -72,7 +72,7 @@ class EventPage extends StatelessWidget {
                       Text(location),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Text(
                     'Información',
                     style: TextStyle(
@@ -82,7 +82,7 @@ class EventPage extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(content),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Text(
                     'Organizador',
                     style: TextStyle(
@@ -90,15 +90,18 @@ class EventPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () {
                         // Acción al presionar el botón
                       },
-                      icon: Icon(Icons.add),
-                      label: Text('Unirse'),
+                      icon: Icon(Icons.add, color: Colors.white),
+                      label: Text('Unirse', style: TextStyle(color: Colors.white)),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 217, 104, 38)),
+                      ),
                     ),
                   ),
                 ],
