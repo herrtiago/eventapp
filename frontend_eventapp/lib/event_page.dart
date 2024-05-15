@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class EventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final Map<String, dynamic>? args =
-      ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     if (args == null) {
       throw Exception("Los argumentos son nulos");
@@ -26,23 +25,26 @@ class EventPage extends StatelessWidget {
           },
         ),
       ),
-      body: Stack(
+      body: Column(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
+            height: 350, // Altura de la imagen
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
             ),
           ),
-          Center(
+          // Segunda fila con la información del evento
+          Expanded(
             child: Container(
-              padding: EdgeInsets.all(20),
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(top: 20), 
+              margin: EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,4 +110,3 @@ class EventPage extends StatelessWidget {
     );
   }
 }
-
